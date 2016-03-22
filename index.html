@@ -30,11 +30,12 @@
         <script type="text/javascript">
             $("#exp").ajaxChosen({
                 type: 'GET',
-                url: 'https://api.github.com/user/10840991/starred?page=1',
-                dataType: 'json'
+                url: 'https://api.github.com/search/repositories',
+                dataType: 'json',
+                jsonTermKey: "q"
             }, function(json) {
                 var results = [];
-                $.each(json, function(i, val) {
+                $.each(json.items, function(i, val) {
                     results.push({
                         id: val.id,
                         name: val.name
