@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Chosen ajax插件</title>
+    <link rel="stylesheet" href="chosen.css">
+</head>
+
+<body>
+    <form>
+        <div id="container">
+            <div id="content">
+                <div class="side-by-side clearfix">
+                    <div>
+                        <em>Demo: </em>
+                        <select id="exp" multiple data-placeholder="Choose a Country..." style="width:350px;" tabindex="1">
+                            <option value=""></option>
+
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <script src="chosen.jquery.js" type="text/javascript"></script>
+        <script src="ajax-chosen.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $("#exp").ajaxChosen({
+                type: 'GET',
+                url: 'https://api.github.com/user/10840991/starred?page=1',
+                dataType: 'json'
+            }, function(json) {
+                var results = [];
+                $.each(json, function(i, val) {
+                    results.push({
+                        id: val.id,
+                        name: val.name
+                    });
+                });
+                return results;
+            });
+        </script>
+    </form>
+</body>
+
+</html>
